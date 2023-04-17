@@ -1,3 +1,5 @@
-Flask==2.0.1
-Flask-RESTful==0.3.8
-requests==2.19.1
+# Follow Task-0 subtask-0 to complete this file. Remove this comment if you think it is causing build issues.
+flask
+flask-restful
+requests
+flask_cors
