@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  landing:
+    build: ./landing
+    ports:
+      - "5000:5000"
+    depends_on:
+      - addition
+    networks:
+      - webnet
+
+  addition:
+    build: ./addition
+    ports:
+      - "5051:5051"
+    networks:
+      - webnet
+
+networks:
+  webnet:
