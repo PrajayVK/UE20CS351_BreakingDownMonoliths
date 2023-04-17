@@ -1,46 +1,49 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
-
+from flask import Flask, render_template, request, flash
+from flask_cors import CORS
 import requests
-import os
 
 app = Flask(__name__)
-app.secret_key = 'thisisjustarandomstring'
+CORS(app)
+app.secret_key = "secret_key"
 
-
-def add(n1, n2):
-    return n1+n2
-
-def minus(n1, n2):
-    return n1-n2
-
-def multiply(n1, n2):
-    return n1*n2
-
-def divide(n1, n2):
-    return n1/n2
-
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=["GET", "POST"])
 def index():
-    number_1 = request.form.get("first")
-    number_2 = request.form.get('second')
-    operation = request.form.get('operation')
-    result = 0
-    if operation == 'add':
-        result = add(number_1, number_2)
-    elif operation == 'minus':
-        result =  minus(number_1, number_2)
-    elif operation == 'multiply':
-        result = multiply(number_1, number_2)
-    elif operation == 'divide':
-        result = divide(number_1, number_2)
+    if request.method == "POST":
+        first = request.form.get("first")
+        second = request.form.get("second")
+        operation = request.form.get("operation")
+        
+        # Fix variable type
+        try:
+            first = int(first)
+            second = int(second)
+        except (ValueError, TypeError):
+            flash("Invalid input. Please enter valid integer values.")
+            return render_template("index.html")
 
-    flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
+        # Handle None type exception
+        if first is None or second is None:
+            flash("Invalid input. Please enter valid integer values.")
+            return render_template("index.html")
+        
+        result = 0
+        if operation == "add":
+            response = requests.get(f"http://addition:5051/{first}&{second}")
+            data = response.json()
+            result = data["result"]
+        elif operation == "minus":
+            result = first - second
+        elif operation == "multiply":
+            result = first * second
+        elif operation == "divide":
+            if second == 0:
+                flash("Invalid input. Cannot divide by zero.")
+                return render_template("index.html")
+            result = first / second
 
-    return render_template('index.html')
+        flash(f"The result of {operation} operation is {result}.")
+        
+    return render_template("index.html")
 
 if __name__ == '__main__':
-    app.run(
-        debug=True,
-        port=5050,
-        host="0.0.0.0"
-    )
+    app.run(host="0.0.0.0", port=5050, debug=True)

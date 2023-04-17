@@ -1,5 +1,3 @@
-# Follow Task-0 subtask-1
-# Use an official Python runtime as a parent image
 FROM python:3.8-alpine
 
 COPY ./app/requirements.txt /app/requirements.txt
@@ -13,5 +11,4 @@ RUN apk add --update \
 
 COPY ./app /app
 
-CMD ["python", "app.py"]
-
+CMD ["python", "addition.py"]
