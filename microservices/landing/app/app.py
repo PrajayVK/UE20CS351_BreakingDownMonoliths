@@ -80,9 +80,9 @@ def index():
             result = multiply(number_1, number_2)
         elif operation == 'divide':
             if number_2==0:
-                        result = 'Zero Division Error'
+                result = 'Zero Division Error'
             else:
-                        result = divide(number_1, number_2)
+                result = divide(number_1, number_2)
         elif operation == 'greater_than':
             result = greater_than(number_1, number_2)
         elif operation == 'less_than':
@@ -91,10 +91,9 @@ def index():
             result = equal(number_1, number_2)
 
         flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
-
-        return render_template('index.html')
+        # Pass the result message to the template
+        return render_template('index.html', result=result)
     except:
-        flash(f'No input value')
         return render_template('index.html')
 
 if __name__ == '__main__':

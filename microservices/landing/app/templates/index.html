@@ -1,26 +1,110 @@
+<!DOCTYPE html>
 <html>
-   <body>
-      <h1>Arithmetic Microservices</h1>
-      <form action="" method="POST">
-         <!-- Hint 1: What if input "first" and "second" had default values? -->
-         Enter the First number : <input name="first">
-         <br>
-         Enter the Second number: <input name="second">
-         <br>
-         Enter Operation: <select id="op" name="operation">
-            <option value="add">Addition</option>
-            <option value="minus">Subtraction</option>
-            <option value="multiply">Multiplication</option>
-            <option value="divide">Division</option>
-            <option value="greater_than">Greater than</option>
-            <option value="less_than">Less than</option>
-            <option value="equal">Equal</option>
-          </select>
-         <br><br>
-         <input type="submit" name="submit_button">
-      </form>
-        {% for message in get_flashed_messages() %}
-         {{message}}
-      {% endfor %}
-   </body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Arithmetic Microservices</title>
+
+    <!-- Link Bootstrap stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+      /* Style for the form input fields */
+      form input[type="text"], select {
+        width: 100%;
+        padding: 18px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: none;
+        border-bottom: 2px solid #DDDDDD;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #F8F8F8;
+        text-align: center;
+        color: #1D1D1D;
+        letter-spacing: 0.05em;
+      }
+
+      /* Style for the submit button */
+      input[type="submit"] {
+        background-color: #1D1D1D;
+        color: white;
+        padding: 14px 20px;
+        margin: 20px 0 0;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 100%;
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #FFFFFF;
+        color: #1D1D1D;
+        border: 1px solid #1D1D1D;
+      }
+
+      /* Style for the h1 tag */
+      h1 {
+        text-align: center;
+        margin-top: 100px;
+        margin-bottom: 50px;
+        font-size: 64px;
+        color: #1D1D1D;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 20px rgba(0,0,0,0.2);
+      }
+
+      /* Style for the body */
+      body {
+        background-color: #F8F8F8;
+      }
+
+      /* Style for the form */
+      form {
+        margin: auto;
+        max-width: 800px;
+        background-color: #FFFFFF;
+        padding: 40px;
+        border-radius: 50px;
+        box-shadow: 0 0 40px rgba(0,0,0,0.1);
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Arithmetic Microservices</h1>
+    <form action="" method="POST">
+      <!-- Hint 1: What if input "first" and "second" had default values? -->
+      <div class="form-group">
+        <label for="first">Enter the First number:</label>
+        <input type="text" class="form-control" id="first" name="first">
+      </div>
+      <div class="form-group">
+        <label for="second">Enter the Second number:</label>
+        <input type="text" class="form-control" id="second" name="second">
+      </div>
+      <div class="form-group">
+        <label for="operation">Enter Operation:</label>
+        <select class="form-control" id="operation" name="operation">
+          <option value="add">Addition</option>
+          <option value="minus">Subtraction</option>
+          <option value="multiply">Multiplication</option>
+          <option value="divide">Division</option>
+          <option value="greater_than">Greater than</option>
+          <option value="less_than">Less than</option>
+          <option value="equal">Equal</option>
+        </select>
+      </div>
+      <br>
+      <input type="submit" class="btn btn-primary" name="submit_button" value="Submit">
+    </form>
+    {% for message in get_flashed_messages() %}
+      {{message}}
+    {% endfor %}
+  </body>
 </html>
