@@ -5,7 +5,7 @@ flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
 from flask_restful import Resource, Api
 class Addition(Resource): 
 	def get(self, num1, num2):
-		return {'result': int(num1) + int(num2)}
+		return {'result': float(num1) + float(num2)}
 
 app = Flask(__name__)
 api = Api(app)
